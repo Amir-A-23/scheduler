@@ -5,8 +5,7 @@ import 'components/Button.scss';
 import classNames from 'classnames';
 
 export default function Button(props) {
-	let btn = classNames({
-		button: true,
+	let btn = classNames('button', {
 		' button--confirm': props.confirm,
 		' button--danger': props.danger,
 	});
