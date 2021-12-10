@@ -16,7 +16,7 @@ function formatSpots(spots) {
 	}
 }
 
-export default function DayListItem(props) {
+function DayListItem(props) {
 	const { name, spots, selected, setDay } = props;
 
 	let dayClass = classNames('day-list__item', {
@@ -31,3 +31,5 @@ export default function DayListItem(props) {
 		</li>
 	);
 }
+
+export default DayListItem;
