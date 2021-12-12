@@ -47,9 +47,12 @@ const appointmentsArr = [
 ];
 
 export default function Application(props) {
-	const [day, setDay] = useState('Monday');
-	const [days, setDays] = useState([]);
-
+	const [state, setState] = useState({
+		day: 'Monday',
+		days: [],
+		// you may put the line below, but will have to remove/comment hardcoded appointments variable
+		appointments: {},
+	});
 	useEffect(() => {
 		const dayURL = '/api/days';
 		axios
@@ -65,9 +68,9 @@ export default function Application(props) {
 			});
 	}, []);
 
-	const appointments = appointmentsArr.map((appointment) => {
-		return <Appointment key={appointment.id} {...appointment} />;
-	});
+	// const appointments = appointmentsArr.map((appointment) => {
+	// 	return <Appointment key={appointment.id} {...appointment} />;
+	// });
 
 	return (
 		<main className='layout'>
