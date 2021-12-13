@@ -45,9 +45,8 @@ function Form(props) {
 						Cancel
 					</Button>
 					{/* Bug where onClick is firing at every key input, like onChange */}
-					<Button confirm onClick={props.onSave(student, interviewer)}>
-						Save
-					</Button>
+					{/* Add back in for booking ....   onClick={props.onSave(student, interviewer)} */}
+					<Button confirm>Save</Button>
 				</section>
 			</section>
 		</main>
