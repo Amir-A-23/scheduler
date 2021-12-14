@@ -51,7 +51,7 @@ function Appointment(props) {
 			{mode === CREATE && (
 				<Form interviewers={props.interviewers} onSave={save} onCancel={back} />
 			)}
-			{mode === SAVING && <Status />}
+			{mode === SAVING && <Status message={'Saving'} />}
 		</article>
 	);
 }
