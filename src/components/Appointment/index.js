@@ -14,6 +14,7 @@ function Appointment(props) {
 	const EMPTY = 'EMPTY';
 	const SHOW = 'SHOW';
 	const CREATE = 'CREATE';
+	const SAVING = 'SAVING';
 
 	const { mode, transition, back } = useVisualMode(
 		props.interview ? SHOW : EMPTY,
@@ -25,6 +26,7 @@ function Appointment(props) {
 			interviewer,
 		};
 
+		transition(SAVING);
 		Promise.resolve(props.bookInterview(props.id, interview))
 			.then(() => transition(SHOW))
 			.catch((err) =>
@@ -49,6 +51,7 @@ function Appointment(props) {
 			{mode === CREATE && (
 				<Form interviewers={props.interviewers} onSave={save} onCancel={back} />
 			)}
+			{mode === SAVING && <Status />}
 		</article>
 	);
 }
