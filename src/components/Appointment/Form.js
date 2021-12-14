@@ -21,7 +21,7 @@ function Form(props) {
 				<form autoComplete='off' onSubmit={(event) => event.preventDefault()}>
 					<input
 						className='appointment__create-input text--semi-bold'
-						name={props.name}
+						name='name'
 						type='text'
 						placeholder='Enter Student Name'
 						onChange={(event) => setStudent(event.target.value)}
@@ -35,7 +35,7 @@ function Form(props) {
 				<InterviewerList
 					/* your code goes here */
 					interviewers={props.interviewers}
-					onChange={(event) => setInterviewer(event)}
+					onChange={setInterviewer}
 					value={interviewer}
 				/>
 			</section>
@@ -45,8 +45,10 @@ function Form(props) {
 						Cancel
 					</Button>
 					{/* Bug where onClick is firing at every key input, like onChange */}
-					{/* Add back in for booking ....   onClick={props.onSave(student, interviewer)} */}
-					<Button confirm>Save</Button>
+					{/* Add back in for booking ....    */}
+					<Button confirm onClick={() => props.onSave(student, interviewer)}>
+						Save
+					</Button>
 				</section>
 			</section>
 		</main>

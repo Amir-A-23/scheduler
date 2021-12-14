@@ -18,18 +18,37 @@ function Appointment(props) {
 	const { mode, transition, back } = useVisualMode(
 		props.interview ? SHOW : EMPTY,
 	);
+
+	function save(name, interviewer) {
+		const interview = {
+			student: name,
+			interviewer,
+		};
+
+		Promise.resolve(props.bookInterview(props.id, interview))
+			.then(() => transition(SHOW))
+			.catch((err) =>
+				console.log('Error coming from appointment not saving', err),
+			);
+		//	props.bookInterview(props.id, interview);
+		//console.log('Inside save function', interview);
+
+		//transition(SHOW);
+	}
 	return (
 		<article className='appointment'>
 			<Header time={props.time} />
 			{mode === EMPTY && <Empty onAdd={() => transition(CREATE)} />}
-			{mode === SHOW && props.interview && (
+			{mode === SHOW && (
 				<Show
 					student={props.interview.student}
 					interviewer={props.interview.interviewer}
 				/>
 			)}
 			{/* Add    onSave={} */}
-			{mode === CREATE && <Form interviewers={[]} onCancel={back} />}
+			{mode === CREATE && (
+				<Form interviewers={props.interviewers} onSave={save} onCancel={back} />
+			)}
 		</article>
 	);
 }
