@@ -36,6 +36,7 @@ export default function Application(props) {
 				interview={interview}
 				interviewers={interviewers}
 				bookInterview={bookInterview}
+				cancelInterview={cancelInterview}
 			/>
 		);
 	});
@@ -81,6 +82,18 @@ export default function Application(props) {
 			console.log('Axios Put error', err);
 		}
 	}
+
+	async function cancelInterview(id) {
+		const appointments = { ...state.appointments };
+
+		try {
+			await axios.delete(`/api/appointments/${id}`);
+			return (appointments[id].interview = null);
+		} catch (err) {
+			console.log('Error Deleting Appointment', err);
+		}
+	}
+
 	return (
 		<main className='layout'>
 			<section className='sidebar'>
@@ -101,7 +114,12 @@ export default function Application(props) {
 			</section>
 			<section className='schedule'>
 				{schedule}
-				<Appointment key='last' time='5pm' bookInterview={bookInterview} />
+				<Appointment
+					key='last'
+					time='5pm'
+					bookInterview={bookInterview}
+					cancelInterview={cancelInterview}
+				/>
 			</section>
 		</main>
 	);

@@ -15,7 +15,9 @@ function Appointment(props) {
 	const SHOW = 'SHOW';
 	const CREATE = 'CREATE';
 	const SAVING = 'SAVING';
-
+	const DELETING = 'DELETING';
+	const EDIT = 'EDIT';
+	const CONFIRM = 'CONFIRM';
 	const { mode, transition, back } = useVisualMode(
 		props.interview ? SHOW : EMPTY,
 	);
@@ -32,11 +34,19 @@ function Appointment(props) {
 			.catch((err) =>
 				console.log('Error coming from appointment not saving', err),
 			);
-		//	props.bookInterview(props.id, interview);
-		//console.log('Inside save function', interview);
-
-		//transition(SHOW);
 	}
+
+	function deleteInterview() {
+		transition(CONFIRM);
+	}
+	function deleteConfirm() {
+		transition(DELETING);
+
+		Promise.resolve(props.cancelInterview(props.id))
+			.then(() => transition(Empty))
+			.catch((err) => console.log('Error Deleting after confirm', err));
+	}
+
 	return (
 		<article className='appointment'>
 			<Header time={props.time} />
@@ -45,6 +55,7 @@ function Appointment(props) {
 				<Show
 					student={props.interview.student}
 					interviewer={props.interview.interviewer}
+					onDelete={deleteInterview}
 				/>
 			)}
 			{/* Add    onSave={} */}
@@ -52,6 +63,14 @@ function Appointment(props) {
 				<Form interviewers={props.interviewers} onSave={save} onCancel={back} />
 			)}
 			{mode === SAVING && <Status message={'Saving'} />}
+			{mode === DELETING && <Status message={'Deleting'} />}
+			{mode === CONFIRM && (
+				<Confirm
+					message={'Please confirm you wish to delete your appointment.'}
+					onCancel={cancel}
+					onDelete={deleteConfirm}
+				/>
+			)}
 		</article>
 	);
 }
