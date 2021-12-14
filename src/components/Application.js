@@ -63,7 +63,7 @@ export default function Application(props) {
 		});
 	}, []);
 
-	function bookInterview(id, interview) {
+	async function bookInterview(id, interview) {
 		//console.log(id, interview);
 		const appointment = {
 			...state.appointments[id],
@@ -74,12 +74,12 @@ export default function Application(props) {
 			[id]: appointment,
 		};
 		//setState({ ...state, appointments });
-		return axios
-			.put(`/api/appointments/${id}`, { interview: interview })
-			.then(() => setState({ ...state, appointments }))
-			.catch((err) => {
-				console.log('Axios Put error', err);
-			});
+		try {
+			await axios.put(`/api/appointments/${id}`, { interview: interview });
+			return setState({ ...state, appointments });
+		} catch (err) {
+			console.log('Axios Put error', err);
+		}
 	}
 	return (
 		<main className='layout'>
