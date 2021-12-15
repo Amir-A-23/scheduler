@@ -86,13 +86,10 @@ function Appointment(props) {
 				/>
 			)}
 			{mode === ERROR_SAVE && (
-				<Error message={'Error saving changes'} oneClose={() => back()} />
+				<Error message={'Error saving changes'} oneClose={back} />
 			)}
 			{mode === ERROR_DELETE && (
-				<Error
-					message={'Error deleting appointment'}
-					oneClose={() => back(SHOW)}
-				/>
+				<Error message={'Error deleting appointment'} oneClose={back} />
 			)}
 		</article>
 	);
