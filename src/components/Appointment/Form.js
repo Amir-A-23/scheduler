@@ -12,6 +12,7 @@ function Form(props) {
 			return;
 		}
 
+		setError('');
 		props.onSave(name, interviewer);
 	}
 	const reset = () => {
