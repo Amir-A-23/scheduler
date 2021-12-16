@@ -2,11 +2,20 @@ import React, { useState } from 'react';
 import Button from 'components/Button';
 import InterviewerList from 'components/InterviewerList';
 function Form(props) {
-	const [student, setStudent] = useState(props.student || '');
+	const [name, setName] = useState(props.name || '');
 	const [interviewer, setInterviewer] = useState(props.interviewer || null);
+	const [error, setError] = useState('');
 
+	function validate() {
+		if (name === '') {
+			setError('Student name cannot be blank');
+			return;
+		}
+
+		props.onSave(name, interviewer);
+	}
 	const reset = () => {
-		setStudent('');
+		setName('');
 		setInterviewer(null);
 	};
 
@@ -24,14 +33,12 @@ function Form(props) {
 						name='name'
 						type='text'
 						placeholder='Enter Student Name'
-						onChange={(event) => setStudent(event.target.value)}
-						value={student}
-						/*
-          This must be a controlled component
-          your code goes here
-        */
+						onChange={(event) => setName(event.target.value)}
+						value={name}
+						data-testid='student-name-input'
 					/>
 				</form>
+				<section className='appointment__validation'>{error}</section>
 				<InterviewerList
 					/* your code goes here */
 					interviewers={props.interviewers}
@@ -46,7 +53,7 @@ function Form(props) {
 					</Button>
 					{/* Bug where onClick is firing at every key input, like onChange */}
 					{/* Add back in for booking ....    */}
-					<Button confirm onClick={() => props.onSave(student, interviewer)}>
+					<Button confirm onClick={() => validate()}>
 						Save
 					</Button>
 				</section>

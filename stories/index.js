@@ -175,7 +175,7 @@ storiesOf('Appointment', module)
 	))
 	.add('Form - edit', () => (
 		<Form
-			student={'Amir Ali'}
+			name={'Amir Ali'}
 			interviewers={interviewers}
 			value={1}
 			onSave={action('onSave')}
