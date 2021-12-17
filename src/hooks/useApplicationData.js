@@ -14,6 +14,9 @@ export default function useApplicationData(props) {
 		interviewers: {},
 	});
 
+	//bookOrCancel is a boolean that handles incrementing or decrementing spots
+	//look for a day in the days array in state that matches the current day in state
+	//return new array as days, either with updated spots count or without
 	const updateSpots = (bookOrCancel) => {
 		const days = state.days.map((day) => {
 			if (day.name === state.day) {
@@ -52,28 +55,9 @@ export default function useApplicationData(props) {
 		});
 	}, []);
 
-	// async function bookInterview(id, interview) {
-	// 	//console.log(id, interview);
-	// 	const appointment = {
-	// 		...state.appointments[id],
-	// 		interview: { ...interview },
-	// 	};
-	// 	const appointments = {
-	// 		...state.appointments,
-	// 		[id]: appointment,
-	// 	};
-
-	// 	const days = updateSpots(true);
-	// 	try {
-	// 		await axios.put(`/api/appointments/${id}`, { interview: interview });
-	// 		setState({ ...state, appointments, days });
-	// 	} catch (err) {
-	// 		console.log('Axios Put error', err);
-	// 	}
-	// }
-
+	//update api to add new interview booking and then update state with new booking
+	//days array updated with new spots value
 	function bookInterview(id, interview) {
-		//console.log(id, interview);
 		const appointment = {
 			...state.appointments[id],
 			interview: { ...interview },
@@ -92,9 +76,8 @@ export default function useApplicationData(props) {
 			});
 	}
 
+	//delete an interview from api and update state
 	function cancelInterview(id) {
-		//const appointments = { ...state.appointments };
-
 		const appointment = {
 			...state.appointments[id],
 			interview: null,

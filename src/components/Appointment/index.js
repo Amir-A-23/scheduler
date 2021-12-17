@@ -40,7 +40,7 @@ function Appointment(props) {
 	function deleteInterview() {
 		transition(CONFIRM);
 	}
-	function deleteConfirm() {
+	function confirmDelete() {
 		transition(DELETING, true);
 
 		Promise.resolve(props.cancelInterview(props.id))
@@ -63,7 +63,6 @@ function Appointment(props) {
 					onEdit={edit}
 				/>
 			)}
-			{/* Add    onSave={} */}
 			{mode === CREATE && (
 				<Form interviewers={props.interviewers} onSave={save} onCancel={back} />
 			)}
@@ -73,7 +72,7 @@ function Appointment(props) {
 				<Confirm
 					message={'Please confirm you wish to delete your appointment.'}
 					onCancel={back}
-					onConfirm={deleteConfirm}
+					onConfirm={confirmDelete}
 				/>
 			)}
 			{mode === EDIT && (

@@ -8,8 +8,6 @@ function DayList(props) {
 		return (
 			<DayListItem
 				key={day.id}
-				//name={day.name}
-				//spots={day.spots}
 				{...day}
 				selected={day.name === props.day}
 				setDay={props.setDay}

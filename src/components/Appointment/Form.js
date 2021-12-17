@@ -41,7 +41,6 @@ function Form(props) {
 				</form>
 				<section className='appointment__validation'>{error}</section>
 				<InterviewerList
-					/* your code goes here */
 					interviewers={props.interviewers}
 					onChange={setInterviewer}
 					value={interviewer}
@@ -52,8 +51,6 @@ function Form(props) {
 					<Button danger onClick={cancel}>
 						Cancel
 					</Button>
-					{/* Bug where onClick is firing at every key input, like onChange */}
-					{/* Add back in for booking ....    */}
 					<Button confirm onClick={() => validate()}>
 						Save
 					</Button>
