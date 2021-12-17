@@ -43,5 +43,7 @@ npm run storybook
 ## Technical Specifications
 
 Front-End React, JSX, Axios, HTML, SASS
+
 Back-End: Node.js, Express, PostgreSQL
+
 Testing: Storybook, Webpack Dev Server, Jest, Cypress
