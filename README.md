@@ -8,15 +8,15 @@ Users can book an interview by entering thier name and choice of interviewer, th
 
 ### Booking an Interview
 
-(docs/book.gif)
+!["Booking an Interview"](/docs/book.gif)
 
 ### Deleting an Interview
 
-(docs/delete.gif)
+!["Deleting an Interview"](/docs/delete.gif)
 
 ### Updating an existing Interview
 
-(docs/update.gif)
+!["Updating an Interview"](/docs/update.gif)
 
 ## Setup
 
