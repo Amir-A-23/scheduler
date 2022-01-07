@@ -44,10 +44,6 @@ export default function useApplicationData(props) {
 			axios.get(appointmentURL),
 			axios.get(interviewersURL),
 		]).then((all) => {
-			console.log(all[0]); // first
-			console.log(all[1]); // second
-			console.log(all[2]); // third
-
 			setState((prev) => ({
 				...prev,
 				days: all[0].data,
@@ -94,14 +90,9 @@ export default function useApplicationData(props) {
 
 		const days = updateSpots(false);
 
-		return axios
-			.delete(`/api/appointments/${id}`)
-			.then(() => {
-				setState({ ...state, appointments, days });
-			})
-			.catch((err) => {
-				console.log('Error Deleting Appointment', err);
-			});
+		return axios.delete(`/api/appointments/${id}`).then(() => {
+			setState({ ...state, appointments, days });
+		});
 	}
 	return {
 		state,
