@@ -22,6 +22,14 @@ Users can book an interview by entering thier name and choice of interviewer, th
 
 Install dependencies with `npm install`.
 
+## API Server Setup
+
+Fork and clone the scheduler-api server from https://github.com/lighthouse-labs/scheduler-api
+
+Follow the README instructions to create and seed the Database
+
+Run the server in a seperate terminal with `npm start`
+
 ## Running Webpack Development Server
 
 ```sh
