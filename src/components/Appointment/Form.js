@@ -12,8 +12,13 @@ function Form(props) {
 			return;
 		}
 
-		setError('');
-		props.onSave(name, interviewer);
+		if (interviewer === null) {
+			setError('Interviewer must be selected');
+			return;
+		}
+
+		//setError('');
+		props.onSave(name, interviewer, props.edit);
 	}
 	const reset = () => {
 		setName('');

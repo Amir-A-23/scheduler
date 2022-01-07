@@ -24,17 +24,17 @@ function Appointment(props) {
 		props.interview ? SHOW : EMPTY,
 	);
 
-	function save(name, interviewer) {
-		const interview = {
-			student: name,
-			interviewer,
-		};
-
-		transition(SAVING);
-
-		Promise.resolve(props.bookInterview(props.id, interview))
-			.then(() => transition(SHOW))
-			.catch((error) => transition(ERROR_SAVE, true));
+	function save(name, interviewer, edit = false) {
+		if (name && interviewer) {
+			transition(SAVING);
+			const interview = {
+				student: name,
+				interviewer,
+			};
+			Promise.resolve(props.bookInterview(props.id, interview, edit))
+				.then(() => transition(SHOW))
+				.catch(() => transition(ERROR_SAVE, true));
+		}
 	}
 
 	function deleteInterview() {
@@ -45,12 +45,13 @@ function Appointment(props) {
 
 		Promise.resolve(props.cancelInterview(props.id))
 			.then(() => transition(EMPTY))
-			.catch((error) => transition(ERROR_DELETE, true));
+			.catch(() => transition(ERROR_DELETE, true));
 	}
 
 	function edit() {
 		transition(EDIT);
 	}
+
 	return (
 		<article className='appointment'>
 			<Header time={props.time} />
@@ -64,7 +65,12 @@ function Appointment(props) {
 				/>
 			)}
 			{mode === CREATE && (
-				<Form interviewers={props.interviewers} onSave={save} onCancel={back} />
+				<Form
+					interviewers={props.interviewers}
+					onSave={save}
+					onCancel={back}
+					edit={false}
+				/>
 			)}
 			{mode === SAVING && <Status message={'Saving'} />}
 			{mode === DELETING && <Status message={'Deleting'} />}
@@ -82,13 +88,14 @@ function Appointment(props) {
 					interviewers={props.interviewers}
 					onSave={save}
 					onCancel={back}
+					edit={true}
 				/>
 			)}
 			{mode === ERROR_SAVE && (
-				<Error message={'Error saving changes'} oneClose={back} />
+				<Error message={'Error saving changes'} onClose={back} />
 			)}
 			{mode === ERROR_DELETE && (
-				<Error message={'Error deleting appointment'} oneClose={back} />
+				<Error message={'Error deleting appointment'} onClose={back} />
 			)}
 		</article>
 	);
