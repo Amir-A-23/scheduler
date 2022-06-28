@@ -1,8 +1,8 @@
 # Interview Scheduler
 
-Interview Scheduler is a single page application built on React that allows users to handle appointnments.
+Interview Scheduler is a single page application built on React that allows users to handle appointments.
 
-Users can book an interview by entering thier name and choice of interviewer, then they can update or delete that interview.
+Users can book an interview by entering their name and choice of interviewer, then they can update or delete that interview.
 
 ## Screenshots
 
